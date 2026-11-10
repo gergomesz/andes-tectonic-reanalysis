@@ -114,7 +114,7 @@ python scripts/reanalysis.py        # writes analysis/results.json and assets/da
 python scripts/extract_thesis_tables.py Daxberger_2013_PhD_thesis.pdf
 ```
 
-**Deploy:** push to GitHub, then Settings → Pages → *Deploy from a branch* → `main` / root. The `.nojekyll` file makes Pages serve the files as-is.
+**Deploy:** push to GitHub, then Settings → Pages → *Deploy from a branch* → `main` / root. 
 
 ## Repository layout
 
