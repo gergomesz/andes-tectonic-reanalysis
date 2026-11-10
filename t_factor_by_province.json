@@ -1,0 +1,59 @@
+{
+  "_source": "Computed from Daxberger (2013) PhD thesis, Table 4.A1 (3,354 second-order basins; T-factor azimuth, R, Curry probability per basin). Per-basin rows were parsed from the open-access thesis PDF; every front's basin count matches the N column of Table 4.1. See README > Data provenance.",
+  "_fields": {
+    "n": "number of second-order basins",
+    "azimuth_bins_10deg": "count of basins whose mean T-vector azimuth falls in [0,10), [10,20), ... [350,360) degrees",
+    "R_bins_0.1": "count of basins whose T-vector magnitude R falls in [0,0.1), ... [0.9,1.0]",
+    "mean_vector_T": "magnitude of the mean of all basin T-vectors (R-weighted)",
+    "mean_vector_azimuth": "azimuth of that mean vector, degrees",
+    "unit_Rbar": "mean resultant length of unit direction vectors (0 = no preferred direction, 1 = all identical)",
+    "rayleigh_p": "Rayleigh test p-value on unit directions (assumes independent basins; see README caveat)",
+    "mean_R": "average per-basin T magnitude",
+    "frac_curry_p_lt_5pct": "share of basins whose own T-vector is significant at p < 5% (Curry 1956 test, as reported)",
+    "vf_quartiles": "per-basin Vf median: [Q1, median, Q3]",
+    "vf_classes": "per-basin counts: V-shaped (Vf <= 0.5), intermediate (0.5-1.7), U-shaped (> 1.7)",
+    "reported_mean_T_thesis": "province T-factor average as stated in the thesis text, p. 157"
+  },
+  "Puna Plateau": {
+    "n": 1240,
+    "azimuth_bins_10deg": [61,74,62,45,57,33,21,17,17,7,8,13,17,16,24,31,36,41,59,66,53,54,61,44,28,15,12,12,15,14,23,27,36,35,40,66],
+    "R_bins_0.1": [287,309,231,205,101,54,37,14,2,0],
+    "mean_vector_T": 0.017,
+    "mean_vector_azimuth": 303,
+    "unit_Rbar": 0.059,
+    "rayleigh_p": 0.0134,
+    "mean_R": 0.242,
+    "frac_curry_p_lt_5pct": 0.152,
+    "vf_quartiles": [0.61, 1.25, 3.12],
+    "vf_classes": [248, 494, 498],
+    "reported_mean_T_thesis": 0.04
+  },
+  "Eastern Cordillera": {
+    "n": 1187,
+    "azimuth_bins_10deg": [58,53,37,37,34,24,17,11,8,7,11,6,12,25,35,41,37,47,70,76,49,57,51,40,20,18,5,10,9,18,21,34,38,37,60,74],
+    "R_bins_0.1": [265,312,249,184,101,46,21,3,5,1],
+    "mean_vector_T": 0.020,
+    "mean_vector_azimuth": 257,
+    "unit_Rbar": 0.080,
+    "rayleigh_p": 0.000535,
+    "mean_R": 0.234,
+    "frac_curry_p_lt_5pct": 0.088,
+    "vf_quartiles": [0.50, 0.97, 1.91],
+    "vf_classes": [302, 534, 351],
+    "reported_mean_T_thesis": 0.03
+  },
+  "Pampean Ranges": {
+    "n": 927,
+    "azimuth_bins_10deg": [45,42,46,48,24,31,16,22,16,12,15,11,8,11,23,30,28,42,36,49,37,43,33,33,26,17,13,10,7,8,12,13,16,29,33,42],
+    "R_bins_0.1": [245,268,176,134,63,31,8,1,0,1],
+    "mean_vector_T": 0.005,
+    "mean_vector_azimuth": 120,
+    "unit_Rbar": 0.008,
+    "rayleigh_p": 0.947,
+    "mean_R": 0.210,
+    "frac_curry_p_lt_5pct": 0.109,
+    "vf_quartiles": [0.35, 0.64, 1.25],
+    "vf_classes": [377, 372, 178],
+    "reported_mean_T_thesis": 0.01
+  }
+}

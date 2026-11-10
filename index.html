@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reading the Puna</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="How mountain-front sinuosity, valley shape and basin symmetry reveal active faults in the southern Central Andes. An interactive reanalysis of Daxberger & Riller (2015).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=STIX+Two+Text:ital@0;1&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="sheet">
+
+<div class="topbar">
+  <span class="src">Daxberger &amp; Riller 2015</span>
+  <div class="tb-right">
+    <button id="theme-toggle" class="theme-btn" type="button" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2"/><path d="M8 1.8 A6.2 6.2 0 0 1 8 14.2 Z"/></svg><span>Dark mode</span></button>
+    <span class="who">Gergo Meszaros</span>
+  </div>
+</div>
+
+<!-- ============================ 01 ============================ -->
+<section class="plate" id="overview">
+  <div class="plate-head">
+    <div>
+      <h1>Reading the Puna</h1>
+      <p class="sub sub-hero">A reanalysis of H. Daxberger’s mountain-front indices, southern Central Andes</p>
+    </div>
+    <button class="replay" type="button" data-replay="xsec">Redraw</button>
+  </div>
+  <div class="hero-intro">
+    <p class="epigraph"><i>Puna</i> (Quechua): ‘the high, cold land’—a tableland some four thousand metres above the sea, where the air is thin enough that Andean Spanish uses the same word for the altitude sickness it brings, and for the cold wind that comes down off its ridges.</p>
+    <p>Faults push rock up. Rivers and weather wear it down. Where the faults are winning, mountain fronts stay straight and valleys stay narrow. Where erosion has caught up, both get worn back. Measure those shapes from satellite elevation data and you can map which faults are still moving, without ever dating a rock. Heidi Daxberger did this for 189 mountain fronts across the southern Central Andes. This site rebuilds her three indices from first principles, then re-runs her published numbers.</p>
+  </div>
+  <div class="figure drawing" id="xsec">
+    <svg viewBox="0 0 1000 380" role="img" aria-labelledby="xsec-t xsec-d">
+      <title id="xsec-t">Schematic west–east cross-section of the Andes at about 25° south</title>
+      <desc id="xsec-d">The Nazca plate subducts beneath South America. From west to east: the Western Cordillera, the Puna Plateau at about 4000 metres, the Eastern Cordillera and the Pampean Ranges. Reverse faults dip both east and west.</desc>
+      <defs>
+        <pattern id="hx-ground" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" class="hatch-line"/></pattern>
+      </defs>
+      <!-- elevation axis -->
+      <g>
+        <line class="axis" x1="20" y1="70" x2="20" y2="270"/>
+        <line class="axis" x1="16" y1="214" x2="20" y2="214"/><text class="tick" x="26" y="217">0 m</text>
+        <line class="axis" x1="16" y1="142" x2="20" y2="142"/><text class="tick" x="26" y="145">3,000</text>
+        <line class="axis" x1="16" y1="118" x2="20" y2="118"/><text class="tick" x="26" y="121">4,000</text>
+        <line class="axis" x1="16" y1="70" x2="20" y2="70"/><text class="tick" x="26" y="73">6,000</text>
+      </g>
+      <!-- sea level -->
+      <line class="ln faint dash" x1="60" y1="214" x2="196" y2="214"/>
+      <path class="ln thin" d="M150 206 l6 0 l-3 5 z"/>
+      <line class="ln thin" x1="149" y1="214" x2="157" y2="214"/>
+      <!-- surface profile -->
+      <path data-draw class="ln" d="M60 262 L112 266 L125 298 L138 268 L200 214 L240 182 L282 116 L304 98 L326 120 L360 113 L398 117 L430 125 L452 113 L482 119 L520 127 L546 113 L572 104 L600 78 L620 93 L642 66 L666 90 L692 122 L716 152 L736 130 L756 170 L780 142 L802 182 L830 162 L850 198 L900 202 L985 206"/>
+      <!-- slab -->
+      <path data-draw class="ln faint" d="M125 298 C 260 316, 430 336, 600 372"/>
+      <path class="ln thin" d="M70 286 l34 0 m-6 -4 l6 4 l-6 4"/>
+      <text class="lbl-sub" x="60" y="304">Nazca plate</text>
+      <!-- faults (bivergent) -->
+      <g class="ln thin">
+        <path data-draw d="M452 113 L470 162"/><path d="M465 150 l5 12 l-9 -8"/>
+        <path data-draw d="M546 113 L526 163"/><path d="M531 151 l-5 12 l9 -8"/>
+        <path data-draw d="M600 78 L622 140"/><path d="M617 128 l5 12 l-9 -8"/>
+        <path data-draw d="M692 122 L670 176"/><path d="M675 164 l-5 12 l9 -8"/>
+        <path data-draw d="M736 130 L758 184"/><path d="M753 172 l5 12 l-9 -8"/>
+        <path data-draw d="M802 182 L782 228"/><path d="M787 216 l-5 12 l9 -8"/>
+      </g>
+      <!-- labels with leaders -->
+      <g>
+        <line class="ln thin" x1="304" y1="98" x2="304" y2="40"/><circle class="fill-ink" cx="304" cy="98" r="2.2"/>
+        <text class="lbl" x="304" y="32" text-anchor="middle">Western Cordillera</text>
+        <line class="ln thin" x1="470" y1="116" x2="470" y2="52"/><circle class="fill-ink" cx="470" cy="116" r="2.2"/>
+        <text class="lbl" x="470" y="38" text-anchor="middle">Puna Plateau</text>
+        <text class="lbl-sub" x="470" y="50" text-anchor="middle">≈ 4,000 m, internally drained</text>
+        <line class="ln thin" x1="642" y1="66" x2="642" y2="22"/><circle class="fill-ink" cx="642" cy="66" r="2.2"/>
+        <text class="lbl" x="642" y="14" text-anchor="middle">Eastern Cordillera</text>
+        <line class="ln thin" x1="780" y1="142" x2="830" y2="92"/><circle class="fill-ink" cx="780" cy="142" r="2.2"/>
+        <text class="lbl" x="836" y="88">Pampean Ranges</text>
+        <text class="lbl-sub" x="836" y="100">basement blocks, ≈ 1,000 m</text>
+        <text class="lbl-sub" x="600" y="232" text-anchor="middle">reverse faults dip both ways (bivergent)</text>
+      </g>
+      <text class="lbl-sub" x="985" y="364" text-anchor="end">Schematic section near 25° S · vertical exaggeration ≈ 20×</text>
+      <text class="lbl" x="60" y="340">W</text><text class="lbl" x="985" y="340" text-anchor="end">E</text>
+    </svg>
+  </div>
+  <div class="hero-figs">
+    <div><div class="v">189</div><div class="k">mountain fronts</div></div>
+    <div><div class="v">3,354</div><div class="k">tributary basins</div></div>
+    <div><div class="v">78</div><div class="k">fronts with dated faults</div></div>
+    <div><div class="v">23–28° S</div><div class="k">NW Argentina</div></div>
+  </div>
+  <div class="plate-foot"><span>Southern Central Andes / Tectonic geomorphology</span><span>01 / 10</span></div>
+</section>
+
+<!-- ============================ 02 ============================ -->
+<section class="plate" id="smf">
+  <div class="plate-head">
+    <div>
+      <h2>Mountain-front sinuosity <button class="eli-btn" type="button" aria-expanded="false" aria-controls="eli-smf" aria-label="Graph 2: explain in simple terms">?</button></h2>
+      <p class="sub">How straight is the edge of a mountain?</p>
+    </div>
+  </div>
+  <div class="eli" id="eli-smf" hidden><p class="eli-k">Graph 2 · in simple terms</p><p>S<sub>mf</sub> compares how long a mountain front is when you follow every bend with how long it is in a straight line. An active fault keeps the front straight; a quiet one lets rivers carve it into bends. Values from 1.0 to 1.65 indicate a straight, active front (Class 1). Values from 1.66 to 2.5 indicate moderate activity (Class 2). Values above 2.5 indicate a worn, inactive front (Class 3).</p></div>
+  <div class="plate-body">
+    <div class="figure"><svg id="smf-svg" viewBox="0 0 800 380" role="img" aria-label="Map view of a mountain front cut by valleys; the front becomes more sinuous as erosion outpaces uplift."></svg></div>
+    <div class="controls">
+      <div class="ctl">
+        <label for="smf-slider"><span>Erosion since last uplift</span><span id="smf-slider-v">10%</span></label>
+        <input id="smf-slider" type="range" min="0" max="100" value="10">
+      </div>
+      <div class="readout" aria-live="polite">
+        <div class="big"><span>S</span><sub>mf</sub> <b>=</b> <span id="smf-val">1.10</span></div>
+        <div class="tag" id="smf-class">Class 1 · Holocene activity</div>
+        <div class="small" id="smf-lens">L<sub>mf</sub> 748 · L<sub>s</sub> 680 (drawing units)</div>
+      </div>
+      <div class="notes">
+        <p><span class="kicker">Mechanism.</span> A reverse fault lifts the range along a straight line. Each time it slips, the front is refreshed along that line. Between slips, streams cut back into the range and carve embayments. The front's length grows while the straight-line distance stays fixed.</p>
+        <p>Daxberger's classes: <strong>1</strong> for S<sub>mf</sub> ≤ 1.65 (Holocene faults), <strong>2</strong> for 1.66–2.5 (late Neogene to Holocene), <strong>3</strong> above 2.5 (Neogene and older). Bull &amp; McFadden's classic cut-off for "active" is 1.4.</p>
+      </div>
+    </div>
+  </div>
+  <div class="formula">S<sub>mf</sub> = L<sub>mf</sub> / L<sub>s</sub></div>
+  <p class="caption">L<sub>mf</sub> is the length along the piedmont–range junction, L<sub>s</sub> the straight length. A curve can never be shorter than its chord, so S<sub>mf</sub> ≥ 1. Fronts were picked where hillslope steepens past 12.5°, in segments over 5 km long.</p>
+  <div class="plate-foot"><span>Southern Central Andes / Tectonic geomorphology</span><span>02 / 10</span></div>
+</section>
+
+<!-- ============================ 03 ============================ -->
+<section class="plate" id="vf">
+  <div class="plate-head">
+    <div>
+      <h2>Valley shape <button class="eli-btn" type="button" aria-expanded="false" aria-controls="eli-vf" aria-label="Graph 3: explain in simple terms">?</button></h2>
+      <p class="sub">Is the valley a V or a U?</p>
+    </div>
+  </div>
+  <div class="eli" id="eli-vf" hidden><p class="eli-k">Graph 3 · in simple terms</p><p>V<sub>f</sub> compares the width of a valley floor with the depth of the valley. Where the ground is rising, the river cuts down faster than it widens, leaving a narrow V. Where the ground is stable, the floor widens into a U. Values below 0.5 indicate a V-shaped valley and active uplift; values above 1.7 indicate a U-shaped valley and stable ground.</p></div>
+  <div class="plate-body">
+    <div class="figure"><svg id="vf-svg" viewBox="0 0 800 380" role="img" aria-label="Cross-section of a valley whose floor narrows into a V as uplift outpaces widening."></svg></div>
+    <div class="controls">
+      <div class="ctl">
+        <label for="vf-slider"><span>Uplift vs. widening</span><span id="vf-slider-v">50%</span></label>
+        <input id="vf-slider" type="range" min="0" max="100" value="50">
+      </div>
+      <div class="readout" aria-live="polite">
+        <div class="big"><span>V</span><sub>f</sub> <b>=</b> <span id="vf-val">0.40</span></div>
+        <div class="tag" id="vf-class">V-shaped</div>
+        <div class="small" id="vf-dims"></div>
+      </div>
+      <div class="notes">
+        <p><span class="kicker">Mechanism.</span> A river has a fixed amount of energy to cut down and to cut sideways. If the ground under it keeps rising, nearly all of that energy goes into cutting down, which leaves a deep, narrow V. If the ground is still, the river has spare energy to widen its floor into a U.</p>
+        <p>Her bins: V-shaped at V<sub>f</sub> ≤ 0.5, intermediate up to 1.7, U-shaped above 1.7. She sampled each valley every 150 m upstream and used the median, because the values were rarely normally distributed.</p>
+      </div>
+    </div>
+  </div>
+  <div class="formula">V<sub>f</sub> = 2V<sub>fw</sub> / [(E<sub>ld</sub> − E<sub>sc</sub>) + (E<sub>rd</sub> − E<sub>sc</sub>)]</div>
+  <p class="caption">V<sub>fw</sub> is valley-floor width, E<sub>ld</sub> and E<sub>rd</sub> the elevations of the left and right divides, E<sub>sc</sub> the valley-floor elevation.</p>
+  <div class="plate-foot"><span>Southern Central Andes / Tectonic geomorphology</span><span>03 / 10</span></div>
+</section>
+
+<!-- ============================ 04 ============================ -->
+<section class="plate" id="tfactor">
+  <div class="plate-head">
+    <div>
+      <h2>Basin symmetry <button class="eli-btn" type="button" aria-expanded="false" aria-controls="eli-tfactor" aria-label="Graph 4: explain in simple terms">?</button></h2>
+      <p class="sub">Which way does the river lean, and why?</p>
+    </div>
+  </div>
+  <div class="eli" id="eli-tfactor" hidden><p class="eli-k">Graph 4 · in simple terms</p><p>T measures how far a river has been pushed away from the middle of its valley. If a fault tilts the ground, the river moves toward the lower side. T = 0 means the river runs down the middle; T = 1 means it runs along the edge. If many valleys lean the same way, a tilt is likely. If they lean in random directions, the cause is harder and softer rock instead.</p></div>
+  <div class="plate-body">
+    <div class="figure"><svg id="t-svg" viewBox="0 0 800 400" role="img" aria-label="Map view of a drainage basin with its midline, the stream, and T-factor vectors measured along transects."></svg></div>
+    <div class="controls">
+      <div class="ctl">
+        <label for="t-slider"><span>Tectonic tilt</span><span id="t-slider-v">toward north</span></label>
+        <input id="t-slider" type="range" min="-100" max="100" value="45">
+      </div>
+      <div class="ctl">
+        <label for="t-noise"><span>Rock-strength noise</span><span id="t-noise-v">low</span></label>
+        <input id="t-noise" type="range" min="0" max="100" value="15">
+      </div>
+      <div class="readout" aria-live="polite">
+        <div class="big"><span>T</span> <b>=</b> <span id="t-val">0.38</span></div>
+        <div class="tag" id="t-dir">Mean vector points N</div>
+        <div class="small" id="t-small">9 transects, 150 m apart</div>
+      </div>
+      <div class="notes">
+        <p><span class="kicker">Mechanism.</span> If a fault tilts a basin sideways, the main stream migrates down the tilt, away from the midline. T measures how far it has moved, from 0 (centred) to 1 (against the divide). T is a vector: it also has a direction.</p>
+        <p>Turn the tilt down and the noise up. The individual vectors stay long, but they point every which way, and their mean shrinks toward zero. That is what Daxberger found in the Andes.</p>
+      </div>
+    </div>
+  </div>
+  <div class="formula">T = D<sub>a</sub> / D<sub>d</sub></div>
+  <p class="caption">D<sub>a</sub> is the distance from the basin midline to the active channel, D<sub>d</sub> from the midline to the divide. Basin vectors are averaged; Curry's (1956) test asks whether the mean could have arisen from random directions.</p>
+  <div class="plate-foot"><span>Southern Central Andes / Tectonic geomorphology</span><span>04 / 10</span></div>
+</section>
+
+<!-- ============================ 05 ============================ -->
+<section class="plate" id="calibration">
+  <div class="plate-head">
+    <div>
+      <h2>Calibration <button class="eli-btn" type="button" aria-expanded="false" aria-controls="eli-calibration" aria-label="Graph 5: explain in simple terms">?</button></h2>
+      <p class="sub">Does sinuosity actually track fault age?</p>
+    </div>
+  </div>
+  <div class="eli" id="eli-calibration" hidden><p class="eli-k">Graph 5 · in simple terms</p><p>Of the 189 fronts, 78 sit on faults whose age is already known. If S<sub>mf</sub> works as a clock, older faults should have more curved fronts. The score ρ runs from 0 (no link) to 1 (a perfect link). Overall, ρ = 0.35, a moderate link. The Puna Plateau fits well (ρ = 0.55). The Eastern Cordillera fits poorly (ρ = 0.17), as several old faults still have straight fronts. The Pampean Ranges show a strong link (ρ = 0.66), but with only nine dated fronts it is less certain.</p></div>
+  <div class="plate-body">
+    <div class="figure" id="cal-fig"><svg id="cal-svg" viewBox="0 0 800 420" role="img" aria-label="Dot plot of mountain-front sinuosity for 78 fronts on faults with published ages, grouped by the epoch in which faulting began."></svg></div>
+    <div class="controls">
+      <div class="chips" id="cal-chips"></div>
+      <div class="readout" aria-live="polite">
+        <div class="big"><span>ρ</span> <b>=</b> <span id="cal-rho">0.35</span></div>
+        <div class="tag" id="cal-tag">All provinces · n = 78</div>
+        <div class="small" id="cal-p">Spearman rank correlation, p = 0.0019</div>
+      </div>
+      <div class="notes">
+        <p><span class="kicker">The key step.</span> Only 78 of the 189 fronts sit on faults with published ages. Daxberger checked that sinuosity rises with age on those 78, then used S<sub>mf</sub> to estimate ages for the other 111. This is supervised learning on a small labelled set.</p>
+        <p><strong>Reanalysis.</strong> The relationship is real but moderate. Faults still active into the Quaternary have a median S<sub>mf</sub> of <span id="cal-act">1.40</span> (n = <span id="cal-actn">46</span>), against <span id="cal-old">1.59</span> (n = <span id="cal-oldn">32</span>) for faults that stopped earlier (one-sided Mann–Whitney p = <span id="cal-mw">0.0003</span>). The signal is strong on the Puna and weak in the Eastern Cordillera.</p>
+      </div>
+    </div>
+  </div>
+  <div class="legend" id="cal-legend"></div>
+  <div class="timescale" aria-label="Geologic time scale">
+    <div class="ts-title">Geologic time, in years before today</div>
+    <div class="ts-row">
+      <div class="ts-cell" style="grid-column: span 20"><b>Eocene</b><span>56 – 34 million</span></div>
+      <div class="ts-cell" style="grid-column: span 10"><b>Oligocene</b><span>34 – 23 million</span></div>
+      <div class="ts-cell" style="grid-column: span 18"><b>Miocene</b><span>23 – 5.3 million</span></div>
+      <div class="ts-cell" style="grid-column: span 9"><b>Pliocene</b><span>5.3 – 2.6 million</span></div>
+      <div class="ts-cell" style="grid-column: span 10"><b>Pleistocene</b><span>2.6 million – 11,700</span></div>
+      <div class="ts-cell" style="grid-column: span 8"><b>Holocene</b><span>11,700 – today</span></div>
+    </div>
+    <div class="ts-row ts-periods">
+      <div class="ts-cell" style="grid-column: span 30"><b>Paleogene</b><span>66 – 23 million (Paleocene, 66 – 56, not shown)</span></div>
+      <div class="ts-cell" style="grid-column: span 27"><b>Neogene</b><span>23 – 2.6 million</span></div>
+      <div class="ts-cell" style="grid-column: span 18"><b>Quaternary</b><span>2.6 million – today</span></div>
+    </div>
+    <p class="ts-note">Epochs (top) group into periods (bottom). Widths are not to scale: the young epochs are stretched so they can be read. Myr = million years ago. Ages follow the International Commission on Stratigraphy (2023).</p>
+  </div>
+  <p class="caption">Fault ages come from published epoch ranges (for example "Mio-Pliocene"); each is placed by the epoch in which faulting began. Shading marks Daxberger's class boundaries; the dashed line is Bull &amp; McFadden's 1.4 limit for active fronts. Bars are medians. Data: thesis Table 4.1.</p>
+  <div class="plate-foot"><span>Southern Central Andes / Tectonic geomorphology</span><span>05 / 10</span></div>
+</section>
+
+<!-- ============================ 06 ============================ -->
+<section class="plate" id="fronts">
+  <div class="plate-head">
+    <div>
+      <h2>All 189 fronts <button class="eli-btn" type="button" aria-expanded="false" aria-controls="eli-fronts" aria-label="Graph 6: explain in simple terms">?</button></h2>
+      <p class="sub">So how many of the faults are still alive?</p>
+    </div>
+  </div>
+  <div class="eli" id="eli-fronts" hidden><p class="eli-k">Graph 6 · in simple terms</p><p>Each dot is one mountain front, placed by how curved it is. Dots left of the first dashed line are straight and active (Class 1); dots right of the second are worn and inactive (Class 3). A front stays straight for only about 100,000 years after its fault stops. Since 126 of the 189 fronts are still straight, most of these faults have moved recently, including those on the Puna.</p></div>
+  <div class="plate-body wide">
+    <div class="figure" id="fr-fig"><svg id="fr-svg" viewBox="0 0 1000 424" role="img" aria-label="Dot histogram of sinuosity for all 189 mountain fronts in three provinces, divided by class boundaries at 1.65 and 2.5."></svg></div>
+  </div>
+  <div class="twin">
+    <div class="notes">
+      <p><span class="kicker">What it shows.</span> 126 of 189 fronts fall in Class 1. If faulting on the plateau had stopped more than 2 million years ago, as earlier work suggested, and fault-generated fronts survive only about 100,000 years before erosion blunts them, Class 3 fronts should dominate the Puna. Only 5 of 76 do.</p>
+      <p>The Pampean Ranges stand apart: the widest spread and the most Class 3 fronts. That fits their thinner crust (about 40 km, against more than 60 km under the plateau) and far smaller total shortening (under 20 km).</p>
+    </div>
+    <div class="tablewrap">
+      <table id="class-table" aria-label="Mountain-front classes per province">
+        <thead><tr><th>Province</th><th class="num">Class 1</th><th class="num">Class 2</th><th class="num">Class 3</th><th class="num">Median S<sub>mf</sub></th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="legend" id="fr-legend"></div>
+  <p class="caption">Each mark is one mountain-front segment. Hover or tap for its fault type, age and valley shape. The square marks segment 196, whose tabulated S<sub>mf</sub> of 0.73 is geometrically impossible (see Questions to ask, sheet 10).</p>
+  <div class="plate-foot"><span>Southern Central Andes / Tectonic geomorphology</span><span>06 / 10</span></div>
+</section>
+
+<!-- ============================ 07 ============================ -->
+<section class="plate" id="valleys">
+  <div class="plate-head">
+    <div>
+      <h2>Valleys versus fronts <button class="eli-btn" type="button" aria-expanded="false" aria-controls="eli-valleys" aria-label="Graph 7: explain in simple terms">?</button></h2>
+      <p class="sub">Why do the valleys disagree with the fronts?</p>
+    </div>
+  </div>
+  <div class="eli" id="eli-valleys" hidden><p class="eli-k">Graph 7 · in simple terms</p><p>Each dot is one mountain front. Active fronts should have both straight edges and narrow valleys, so the dots were expected to rise from lower left to upper right (dashed arrow). Instead they fall (solid line): the most active fronts have the widest valleys. The cause is not yet known. The satellite data may be too coarse to see narrow valley floors, or sediment may be filling the valleys.</p></div>
+  <div class="plate-body">
+    <div class="figure" id="vs-fig"><svg id="vs-svg" viewBox="0 0 800 440" role="img" aria-label="Scatter plot of median valley shape ratio against mountain-front sinuosity for 189 fronts, on a log scale."></svg></div>
+    <div class="controls">
+      <div class="readout">
+        <div class="big"><span>ρ</span> <b>=</b> <span id="vs-rho">−0.36</span></div>
+        <div class="tag">Spearman, 189 fronts</div>
+        <div class="small" id="vs-p">p &lt; 0.001</div>
+      </div>
+      <div class="notes">
+        <p><span class="kicker">Expected.</span> Bull &amp; McFadden's framework predicts that active fronts have both low S<sub>mf</sub> and narrow, V-shaped valleys, so the points should climb from lower left to upper right.</p>
+        <p><span class="kicker">Observed.</span> Per-front medians run the other way. Class 1 fronts have a median V<sub>f</sub> of <span id="vs-c1">1.10</span> and Class 3 fronts <span id="vs-c3">0.73</span>. The thesis notes that V<sub>f</sub> does not track fault age, and makes its positive case from map patterns rather than from these medians.</p>
+        <p><span class="kicker">Candidate reasons.</span> V<sub>f</sub> is sampled along each whole tributary, not just at the front. A 90 m DEM resampled to 30 m blurs narrow floors. Active plateau basins fill with sediment, which widens floors. Each is testable.</p>
+      </div>
+    </div>
+  </div>
+  <div class="legend" id="vs-legend"></div>
+  <p class="caption">One point per front: median V<sub>f</sub> of its tributary basins against its S<sub>mf</sub>. The solid line is a least-squares fit in log space; the dashed arrow is the direction the classic model expects.</p>
+  <div class="plate-foot"><span>Southern Central Andes / Tectonic geomorphology</span><span>07 / 10</span></div>
+</section>
+
+<!-- ============================ 08 ============================ -->
+<section class="plate" id="tilt">
+  <div class="plate-head">
+    <div>
+      <h2>Tilt directions <button class="eli-btn" type="button" aria-expanded="false" aria-controls="eli-tilt" aria-label="Graph 8: explain in simple terms">?</button></h2>
+      <p class="sub">Is there a tilt hiding in 3,354 basins?</p>
+    </div>
+  </div>
+  <div class="eli" id="eli-tilt" hidden><p class="eli-k">Graph 8 · in simple terms</p><p>Each diagram shows which way the rivers lean in one region; bigger petals mean more rivers leaning that way. The valleys run east to west, so the rivers can only lean north or south. In every region the split is about half and half. With neither side winning, the leaning comes from harder and softer rock, not from a tectonic tilt.</p></div>
+  <div class="roses" id="roses"></div>
+  <div class="twin">
+    <div class="notes">
+      <p><span class="kicker">Reading the roses.</span> Petal area is proportional to the number of basins whose stream is pushed toward that bearing. The petals point north and south because the tributary basins run roughly east–west, off north–south mountain fronts. So the real question is whether north or south wins.</p>
+      <p>Neither does. The split is close to 50:50 in every province. A typical basin is noticeably lopsided (mean |T| ≈ 0.2), but the lopsidedness cancels out across basins. That supports Daxberger's reading that local rock strength sets basin asymmetry, not tectonic tilting.</p>
+    </div>
+    <div class="notes">
+      <p><span class="kicker">One discrepancy.</span> The thesis reports province-average T of 0.04, 0.03 and 0.01. The vector mean of the tabulated per-basin values gives <span id="tilt-mv">0.017, 0.020 and 0.005</span>. The order and the conclusion are the same; the averaging step may differ.</p>
+      <p><span class="kicker">Caveat.</span> Neighbouring basins share rocks and faults, so they are not independent samples. The p-values here therefore understate the true uncertainty.</p>
+    </div>
+  </div>
+  <p class="caption">Data: thesis Table 4.A1, mean T-vector per basin. Hollow-tipped arrow: mean vector of all basins in the province, drawn at 20× scale so it is visible.</p>
+  <div class="plate-foot"><span>Southern Central Andes / Tectonic geomorphology</span><span>08 / 10</span></div>
+</section>
+
+<!-- ============================ 09 ============================ -->
+<section class="plate" id="basins">
+  <div class="plate-head">
+    <div>
+      <h2>First-order basins <button class="eli-btn" type="button" aria-expanded="false" aria-controls="eli-basins" aria-label="Graph 9: explain in simple terms">?</button></h2>
+      <p class="sub">What do the big valleys remember?</p>
+    </div>
+    <button class="replay" type="button" data-replay="fans">Redraw</button>
+  </div>
+  <div class="eli" id="eli-basins" hidden><p class="eli-k">Graph 9 · in simple terms</p><p>Alluvial fans are piles of gravel that form where a steep stream leaves the mountains. Where the mountain beside a basin is rising, the basin tips away from it and the main river is pushed to the far side. Where the ground is sinking along a fault, the river moves toward it. The river's position therefore shows what the fault is doing.</p></div>
+  <div class="fans drawing" id="fans"></div>
+  <div class="notes">
+    <p><span class="kicker">Method.</span> For 32 large intermontane basins, Daxberger read the alluvial-fan profiles and the position of the main river across the basin. An undisturbed fan is smoothly concave. Uplift at the range front steepens the fan head, the stream trenches into it, and the main river is pushed away from the rising block. A normal fault does the opposite and drags the river toward it. In most basins the inferred tilt points away from Class 1 and Class 2 fronts, which links fan tilt to hanging-wall uplift on reverse faults. Counts are the basins she lists for each type; one basin can show more than one type along its margins.</p>
+  </div>
+  <div class="plate-foot"><span>Southern Central Andes / Tectonic geomorphology</span><span>09 / 10</span></div>
+</section>
+
+<!-- ============================ 10 ============================ -->
+<section class="plate" id="conclusion">
+  <div class="plate-head">
+    <div>
+      <h2>What it means <button class="eli-btn" type="button" aria-expanded="false" aria-controls="eli-conclusion" aria-label="Graph 10: explain in simple terms">?</button></h2>
+      <p class="sub">Now what?</p>
+    </div>
+    <button class="replay" type="button" data-replay="wedge">Redraw</button>
+  </div>
+  <div class="eli" id="eli-conclusion" hidden><p class="eli-k">Graph 10 · in simple terms</p><p>In a simple model of a mountain range, new faults form only at its outer edge, and the faults behind them stop moving. The Andes do not follow this model. Active faults are found throughout the interior, because old weak zones in the rock keep breaking under pressure. The range is therefore still being pushed up from the inside.</p></div>
+  <div class="twin drawing" id="wedge">
+    <figure class="fan"><svg viewBox="0 0 460 230" role="img" aria-label="Ideal orogenic wedge: only the frontal thrust is active.">
+      <path data-draw class="ln" d="M20 190 L120 70 L300 90 L440 190"/>
+      <line class="ln faint" x1="10" y1="190" x2="450" y2="190"/>
+      <path data-draw class="ln faint dash" d="M140 190 L190 82"/><path data-draw class="ln faint dash" d="M230 190 L270 88"/><path data-draw class="ln faint dash" d="M310 190 L340 112"/>
+      <path data-draw class="ln bold" d="M390 190 L412 165"/>
+      <text class="lbl" x="412" y="152" text-anchor="middle">active</text>
+      <text class="lbl-sub" x="240" y="214" text-anchor="middle">older thrusts inactive · youngest at the toe</text>
+    </svg><figcaption><b>Expected · in-sequence</b>An ideal, uniform wedge grows by adding new thrusts at its leading edge. In the Andes that edge is the Subandean belt and Santa Barbara System, far to the east.</figcaption></figure>
+    <figure class="fan"><svg viewBox="0 0 460 230" role="img" aria-label="Observed: active reverse faults dipping both ways throughout the hinterland.">
+      <path data-draw class="ln" d="M20 190 L120 70 L300 90 L440 190"/>
+      <line class="ln faint" x1="10" y1="190" x2="450" y2="190"/>
+      <path data-draw class="ln bold" d="M150 74 L180 150"/><path data-draw class="ln bold" d="M220 80 L196 150"/>
+      <path data-draw class="ln bold" d="M270 86 L300 150"/><path data-draw class="ln bold" d="M330 112 L308 160"/>
+      <path data-draw class="ln bold" d="M390 160 L412 186"/>
+      <text class="lbl" x="200" y="56" text-anchor="middle">Puna</text><text class="lbl" x="300" y="70" text-anchor="middle">E. Cordillera</text><text class="lbl" x="420" y="150" text-anchor="middle">Pampean</text>
+      <text class="lbl-sub" x="240" y="214" text-anchor="middle">bivergent faults active throughout the hinterland</text>
+    </svg><figcaption><b>Observed · out-of-sequence</b>Class 1 fronts sit on east- and west-dipping reverse faults across the plateau and its foreland. Old weaknesses, such as Cretaceous rift faults and basement foliation, let the interior keep breaking.</figcaption></figure>
+  </div>
+  <div class="cols">
+    <div>
+      <h3>Her conclusions</h3>
+      <ol>
+        <li>Mountain-front sinuosity works as a proxy for fault age where no radiometric dates exist.</li>
+        <li>Quaternary-to-recent deformation on bivergent reverse and thrust faults is pervasive across the Puna, Eastern Cordillera and Pampean Ranges, more than earlier work recognised.</li>
+        <li>Deformation did not simply migrate to the foreland. It continues out of sequence in the hinterland.</li>
+        <li>Second-order basin asymmetry (T) reflects variable local erosion, not tectonic tilt. Climate has limited influence on first-order landforms.</li>
+      </ol>
+    </div>
+    <div>
+      <h3>What the reanalysis adds</h3>
+      <ul id="reanalysis-list">
+        <li>Smf–age: Spearman ρ = 0.35 across 78 dated fronts (p = 0.002); ρ = 0.55 on the Puna, 0.17 in the Eastern Cordillera.</li>
+        <li>Front-scale V<sub>f</sub> correlates negatively with S<sub>mf</sub> (ρ = −0.36), opposite to the classic expectation (sheet 07).</li>
+        <li>T directions split close to 50:50 north–south in all three provinces (sheet 08).</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Questions to ask</h3>
+      <ol id="flags" class="qlist"></ol>
+    </div>
+    <div>
+      <h3>Sources</h3>
+      <p>Daxberger, H., Riller, U. (2015). Analysis of geomorphic indices in the southern Central Andes (23°–28°S): Evidence for pervasive Quaternary to Recent deformation in the Puna Plateau. <i>Geomorphology</i> 248, 57–76. <a href="https://doi.org/10.1016/j.geomorph.2015.07.016">doi:10.1016/j.geomorph.2015.07.016</a></p>
+      <p>Daxberger, H. (2013). <i>Tectonomorphologic and kinematic characterization of Neogene deformation in the southern Central Andes (23°–28°S, NW Argentina).</i> PhD thesis, McMaster University. <a href="http://hdl.handle.net/11375/13458">hdl:11375/13458</a> (open access; source of all data here).</p>
+      <p>Daxberger, H., Dalumpines, R., Scott, D.M., Riller, U. (2014). The ValleyMorph Tool. <i>Computers &amp; Geosciences</i> 70, 154–163. <a href="https://doi.org/10.1016/j.cageo.2014.05.015">doi:10.1016/j.cageo.2014.05.015</a></p>
+      <p>Bull, W.B., McFadden, L.D. (1977). Tectonic geomorphology north and south of the Garlock fault, California. · Cox, R.T. (1994). <i>GSA Bulletin</i> 106, 571–581.</p>
+      <p>Code and extracted data: see the repository README. This is an independent study project, not affiliated with the authors.</p>
+    </div>
+  </div>
+  <div class="plate-foot"><span>Southern Central Andes / Tectonic geomorphology</span><span>10 / 10</span></div>
+</section>
+
+</div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
