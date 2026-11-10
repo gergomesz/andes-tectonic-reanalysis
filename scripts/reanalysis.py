@@ -22,9 +22,6 @@ from scipy import stats
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 
-# Onset of fault activity, as an ordinal epoch rank (0 = youngest).
-# The thesis reports fault ages as epoch ranges ("Mio-Pliocene", "Pleisto-Holocene" ...).
-# We rank each range by the epoch in which activity is reported to START.
 ONSET_RANK = {
     "Holocene": 0,
     "Pleisto-Holocene": 1, "Pleist-Holocene": 1, "Quaternary": 1,
@@ -95,15 +92,12 @@ def main() -> None:
         ],
     }
 
-    # ---- 3. Vf versus Smf at the mountain-front scale ---------------------------
     out["vf_vs_smf"] = {
         "all": spearman(fronts.smf, fronts.vf_median),
         "by_province": {p: spearman(g.smf, g.vf_median) for p, g in fronts.groupby("province")},
         "vf_median_by_class": {str(k): r(g.vf_median.median(), 2) for k, g in fronts.groupby("class")},
         "vf_vs_onset": spearman(dated.onset, dated.vf_median),
     }
-
-    # ---- 4. T-factor: is there a preferred tilt direction? ---------------------
     t_out = {}
     for p, d in tfac.items():
         if p.startswith("_"):
@@ -125,8 +119,6 @@ def main() -> None:
         }
     out["t_factor"] = t_out
 
-    # ---- 5. Questions for the author ---------------------------------------------
-    # Open questions to ask the author. Each has an "answer" slot to fill in afterwards.
     qs = []
     for _, row in fronts[fronts.smf < 1].iterrows():
         qs.append(f"Segment {row.segment_id} in the {row.province} has an Smf of {row.smf:.2f}. "
@@ -147,7 +139,6 @@ def main() -> None:
     (ROOT / "analysis").mkdir(exist_ok=True)
     (ROOT / "analysis" / "results.json").write_text(json.dumps(out, indent=2))
 
-    # ---- 6. Embed for the static site ------------------------------------------
     keep = ["province", "segment_id", "fault_type", "age", "trend_deg", "smf", "n_basins", "vf_median", "class"]
     rows = fronts[keep].copy()
     rows["age"] = rows.age.fillna("")
