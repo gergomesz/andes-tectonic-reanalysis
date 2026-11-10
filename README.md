@@ -3,6 +3,8 @@
 
 **An interactive reanalysis of how landform shape reveals active faults in the southern Central Andes (23–28° S).**
 
+**[Open the interactive visualizer →](https://gergomesz.github.io/andes-tectonic-reanalysis/)**
+
 This site rebuilds, from first principles, the three geomorphic indices used by Daxberger & Riller (2015, *Geomorphology* 248, 57–76) and re-runs the analysis on the data published in Heidi Daxberger's open-access PhD thesis (McMaster University, 2013). It is a single static page with no build step and no dependencies, ready for GitHub Pages.
 
 > Faults push rock up; rivers and weather wear it down. Where faults are winning, mountain fronts stay straight and valleys stay narrow. Measure those shapes from satellite elevation data and you can map which faults are still moving, without dating a rock.
