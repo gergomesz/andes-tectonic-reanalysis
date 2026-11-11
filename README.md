@@ -5,7 +5,7 @@
 
 **[Open the interactive visualizer →](https://gergomesz.github.io/andes-tectonic-reanalysis/)**
 
-This site rebuilds, from first principles, the three geomorphic indices used by Daxberger & Riller (2015, *Geomorphology* 248, 57–76) and re-runs the analysis on the data published in Heidi Daxberger's open-access PhD thesis (McMaster University, 2013). It is a single static page with no build step and no dependencies, ready for GitHub Pages.
+This site rebuilds, from first principles, the three geomorphic indices used by Daxberger & Riller (2015, *Geomorphology* 248, 57–76) and re-runs the analysis on the data published in Heidi Daxberger's open-access PhD thesis (McMaster University, 2013).
 
 > Faults push rock up; rivers and weather wear it down. Where faults are winning, mountain fronts stay straight and valleys stay narrow. Measure those shapes from satellite elevation data and you can map which faults are still moving, without dating a rock.
 
@@ -36,7 +36,7 @@ This site rebuilds, from first principles, the three geomorphic indices used by 
 
 Daxberger extracted these from SRTM (90 m, cubically resampled to 30 m) with the ArcGIS ValleyMorph / River Transect Tool (Daxberger et al. 2014). She rejected the 30 m ASTER GDEM because it contained ~3.5 million undefined-flow cells against ~0.5 million for SRTM. Mountain fronts were taken where hillslope exceeds 12.5°, in segments >5 km long whose strands differ in trend by <10°.
 
-## Data provenance
+## Data origin
 
 All numbers come from the open-access thesis: Daxberger, H. (2013), *Tectonomorphologic and kinematic characterization of Neogene deformation in the southern Central Andes (23°–28°S, NW Argentina)*, PhD thesis, McMaster University, [hdl:11375/13458](http://hdl.handle.net/11375/13458).
 
