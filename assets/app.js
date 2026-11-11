@@ -20,7 +20,7 @@
     btn.addEventListener("click", () => {
       const next = current() === "dark" ? "light" : "dark";
       root.setAttribute("data-theme", next);
-      try { localStorage.setItem("rtp-theme", next); } catch (e) 
+      try { localStorage.setItem("rtp-theme", next); } catch (e) {}
       label();
     });
     if (mq && mq.addEventListener) mq.addEventListener("change", label);
