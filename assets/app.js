@@ -115,7 +115,6 @@
   }
   function smfClass(v) { return v <= E1 ? 1 : v <= E2 ? 2 : 3; }
 
-  // tooltips
   function makeTip(container) {
     const tip = document.createElement("div");
     tip.className = "tip"; tip.hidden = true; container.appendChild(tip);
