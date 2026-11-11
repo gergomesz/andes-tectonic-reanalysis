@@ -5,7 +5,6 @@
   "use strict";
   const D = window.DATA;
 
-  // ---------- light / dark toggle ----------
   (function themeToggle() {
     const btn = document.getElementById("theme-toggle");
     if (!btn) return;
@@ -38,7 +37,6 @@
   const FAULT = { 1: "Reverse fault", 2: "Inferred reverse", 3: "Normal fault", 4: "Inferred normal", 5: "Strike-slip", 6: "Inferred strike-slip", 7: "Photolineament" };
   const E1 = D.classEdges.class1_max, E2 = D.classEdges.class2_max;
 
-  // ---------- helpers ----------
   function S(tag, attrs, parent) {
     const e = document.createElementNS(NS, tag);
     if (attrs) for (const k in attrs) e.setAttribute(k, attrs[k]);
@@ -146,7 +144,7 @@
     return `<b>Segment ${f.segment_id} · ${PSHORT[f.province]}</b><br>S<sub>mf</sub> ${fmt(f.smf)} · Class ${f["class"]}<br>${FAULT[f.fault_type] || "Fault"}${f.age ? " · " + f.age : ""}<br>Median V<sub>f</sub> ${fmt(f.vf_median)} · ${f.n_basins} basins`;
   }
 
-  // draw-on animation (from a visible resting state; triggered on load for the hero and by Redraw buttons)
+
   function drawOn(root) {
     if (REDUCED || !root) return;
     root.querySelectorAll("[data-draw]").forEach((p) => {
@@ -174,9 +172,7 @@
   }));
   document.querySelectorAll("[data-replay]").forEach((b) => b.addEventListener("click", () => drawOn(document.getElementById(b.dataset.replay))));
 
-  // =================================================================
-  // 02  Mountain-front sinuosity
-  // =================================================================
+
   (function smfPlate() {
     const svg = document.getElementById("smf-svg");
     const slider = document.getElementById("smf-slider");
@@ -204,10 +200,10 @@
       for (let i = 1; i < pts.length; i++) L += Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
       const Ls = X1 - X0, smf = L / Ls;
       const line = pts.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1)).join(" ");
-      // range (hatched) above the front
+
       const back = pts.slice().reverse().map((p) => "L" + p[0].toFixed(1) + " " + p[1].toFixed(1)).join(" ");
       S("path", { d: `M${X0} 30 L${X1} 30 ${back} Z`, fill: "url(#hx-range)", stroke: "none" }, svg);
-      // streams + fans
+
       VX.forEach((vx, i) => {
         const apex = y0 - depth(i);
         S("path", { d: `M${vx} ${apex + 2} L${vx} ${y0 + 34 + 16 * e}`, class: "ln faint" }, svg);
@@ -215,16 +211,16 @@
         S("path", { d: `M${vx - r} ${y0 + 6} A ${r} ${r * 0.8} 0 0 0 ${vx + r} ${y0 + 6}`, class: "ln faint" }, svg);
       });
       S("path", { d: line, class: "ln bold" }, svg);
-      // fault trace with thrust teeth on the hanging wall (range) side
+
       S("line", { x1: X0, y1: FAULT_Y, x2: X1, y2: FAULT_Y, class: "ln thin" }, svg);
       for (let x = X0 + 20; x < X1; x += 44) S("path", { d: `M${x - 5} ${FAULT_Y} L${x} ${FAULT_Y - 7} L${x + 5} ${FAULT_Y} Z`, class: "fill-ink" }, svg);
-      // Ls dimension
+
       const dy = 312;
       S("line", { x1: X0, y1: dy - 8, x2: X0, y2: dy + 8, class: "ln thin" }, svg);
       S("line", { x1: X1, y1: dy - 8, x2: X1, y2: dy + 8, class: "ln thin" }, svg);
       arrow(svg, 400, dy, X0 + 1, dy); arrow(svg, 400, dy, X1 - 1, dy);
       mathLabel(svg, 400, dy - 8, "L", "s", "middle");
-      // labels
+
       txt(svg, X1 + 8, 60, "Range", "lbl"); txt(svg, X1 + 8, 72, "uplifted block", "lbl-sub");
       txt(svg, X1 + 8, FAULT_Y + 4, "Fault", "lbl");
       txt(svg, X1 + 8, FAULT_Y + 16, "stays straight", "lbl-sub");
@@ -235,7 +231,7 @@
       const t = mathLabel(svg, lx + 38, 22, "L", "mf");
       txt(svg, lx + 66, 22, "mountain front, measured along every bend", "lbl-sub");
       txt(svg, 8, 22, "N ↑", "lbl");
-      // readout
+
       document.getElementById("smf-slider-v").textContent = Math.round(e * 100) + "%";
       document.getElementById("smf-val").textContent = fmt(smf);
       const c = smfClass(smf);
@@ -246,9 +242,7 @@
     render();
   })();
 
-  // =================================================================
-  // 03  Valley shape
-  // =================================================================
+
   (function vfPlate() {
     const svg = document.getElementById("vf-svg");
     const slider = document.getElementById("vf-slider");
@@ -265,12 +259,12 @@
       const prof = `M${LD[0]} ${LD[1]} Q ${(LD[0] + fl) / 2 - 20} ${(LD[1] + fy) / 2 - 18}, ${fl} ${fy} L${fr} ${fy} Q ${(fr + RD[0]) / 2 + 20} ${(RD[1] + fy) / 2 - 18}, ${RD[0]} ${RD[1]}`;
       S("path", { d: prof + ` L${RD[0] + 30} ${RD[1] + 4} L${RD[0] + 30} ${BASE} L${LD[0] - 30} ${BASE} L${LD[0] - 30} ${LD[1] + 4} Z`, fill: "url(#hx-ground)", stroke: "none" }, svg);
       S("path", { d: `M${LD[0] - 30} ${LD[1] + 4} L${LD[0]} ${LD[1]} ` + prof.slice(prof.indexOf("Q")) + ` L${RD[0] + 30} ${RD[1] + 4}`, class: "ln bold" }, svg);
-      // water
+
       const ww = Math.max(4, Math.min(30, W * 0.5));
       S("line", { x1: 410 - ww / 2, y1: fy - 1, x2: 410 + ww / 2, y2: fy - 1, class: "ln" }, svg);
       S("path", { d: `M404 ${fy - 16} l12 0 l-6 9 z`, class: "ln thin" }, svg);
       S("line", { x1: 405, y1: fy - 4, x2: 415, y2: fy - 4, class: "ln thin" }, svg);
-      // elevation axis + guides
+
       S("line", { x1: AX, y1: 40, x2: AX, y2: BASE - 10, class: "axis" }, svg);
       [[LD[1], "E", "ld", LD[0]], [RD[1], "E", "rd", RD[0]], [fy, "E", "sc", fl]].forEach(([y, b, s, x]) => {
         S("line", { x1: AX, y1: y, x2: x, y2: y, class: "ln faint dash" }, svg);
@@ -278,9 +272,9 @@
         mathLabel(svg, AX - 8, y + 5, b, s, "end");
       });
       S("line", { x1: RD[0], y1: RD[1], x2: RD[0] + 30, y2: RD[1], class: "ln faint dash" }, svg);
-      // divide markers
+
       [LD, RD].forEach(([x, y], i) => { S("circle", { cx: x, cy: y, r: 2.4, class: "fill-ink" }, svg); txt(svg, x, y - 12, i ? "Right divide" : "Left divide", "lbl", "middle"); });
-      // Vfw dimension
+
       const dy = fy + 22;
       if (W > 18) {
         S("line", { x1: fl, y1: fy + 6, x2: fl, y2: dy + 6, class: "ln thin" }, svg);
@@ -303,9 +297,7 @@
     render();
   })();
 
-  // =================================================================
-  // 04  Basin symmetry (T-factor)
-  // =================================================================
+
   (function tPlate() {
     const svg = document.getElementById("t-svg");
     const tilt = document.getElementById("t-slider");
@@ -318,16 +310,16 @@
     function render() {
       const t = tilt.value / 100, n = noise.value / 100;
       clear(svg);
-      // compass + front
+
       txt(svg, 30, 40, "N", "lbl", "middle"); arrow(svg, 30, 78, 30, 48);
       S("line", { x1: CX + RX, y1: 40, x2: CX + RX, y2: 372, class: "ln thin dash" }, svg);
       txt(svg, CX + RX + 10, 52, "Mountain front", "lbl"); txt(svg, CX + RX + 10, 64, "runs N–S", "lbl-sub");
-      // basin outline (drainage divide) + midline
+
       S("ellipse", { cx: CX, cy: CY, rx: RX, ry: RY, class: "ln", "stroke-dasharray": "14 4 2 4" }, svg);
       S("line", { x1: CX - RX + 6, y1: CY, x2: CX + RX, y2: CY, class: "ln faint dash" }, svg);
       txt(svg, CX - RX + 14, CY + 16, "Basin midline", "lbl-sub");
       txt(svg, CX - 120, CY - RY - 10, "Drainage divide", "lbl-sub", "middle");
-      // stream
+ 
       const sy = (x) => {
         const hh = h(x), tp = taper(x);
         let v = (t * 0.72 + n * 0.9 * nz(x)) * tp;
@@ -338,7 +330,7 @@
       for (let x = CX - RX + 40; x <= CX + RX; x += 2) d += (d ? " L" : "M") + x + " " + sy(x).toFixed(1);
       S("path", { d, class: "ln bold" }, svg);
       txt(svg, CX + RX - 6, CY + 18, "outlet", "lbl-sub", "end");
-      // transects
+
       const xs = [160, 220, 280, 340, 400, 460, 520, 580, 640];
       const T = xs.map((x) => (CY - sy(x)) / h(x));
       xs.forEach((x, i) => {
@@ -347,7 +339,7 @@
         if (Math.abs(ys - CY) > 6) arrow(svg, x, CY, x, ys);
         S("circle", { cx: x, cy: ys, r: 2.4, class: "fill-ink" }, svg);
       });
-      // dimensions on the centre transect
+
       const xc = 400, yc = sy(xc), hc = h(xc), north = yc <= CY;
       const dx = xc + 16;
       const ddEnd = north ? CY - hc : CY + hc;
@@ -360,7 +352,7 @@
         mathLabel(svg, dx - 6, (CY + yc) / 2 + 4, "D", "a", "end");
       }
       txt(svg, 160, CY + RY + 36, "Transects every 150 m · arrows = local T-vectors", "lbl-sub");
-      // readout
+
       const mean = T.reduce((a, b) => a + b, 0) / T.length;
       const meanAbs = T.reduce((a, b) => a + Math.abs(b), 0) / T.length;
       const tl = Math.abs(t) < 0.05 ? "none" : (t > 0 ? "toward north" : "toward south");
@@ -375,9 +367,7 @@
     render();
   })();
 
-  // =================================================================
-  // 05  Calibration: Smf vs onset of faulting
-  // =================================================================
+
   (function calPlate() {
     const svg = document.getElementById("cal-svg");
     const fig = document.getElementById("cal-fig");
@@ -417,7 +407,7 @@
       S("rect", { x: L, y: yS(E2), width: Rr - L, height: yS(E1) - yS(E2), fill: "url(#hx-c2)", opacity: 0.45 }, svg);
       S("rect", { x: L, y: TOP, width: Rr - L, height: yS(E2) - TOP, fill: "url(#hx-c3)", opacity: 0.35 }, svg);
       [[1.0, "Class 1"], [2.07, "Class 2"], [3.6, "Class 3"]].forEach(([v, s]) => txt(svg, Rr - 6, yS(v), s, "lbl", "end"));
-      // axes
+ 
       S("line", { x1: L, y1: TOP, x2: L, y2: BOT, class: "axis" }, svg);
       S("line", { x1: L, y1: BOT, x2: Rr, y2: BOT, class: "axis" }, svg);
       [1, 1.4, 2, 3, 4].forEach((v) => {
@@ -443,7 +433,7 @@
           tip.bind(g, frontTip(f));
         });
       });
-      // stats
+    
       const keys = PROV.filter((p) => on[p]);
       let rho, label, ptxt;
       if (keys.length === 3) { rho = R.all.rho; label = "All provinces · n = " + R.all.n; ptxt = "Spearman rank correlation, p = " + R.all.p; }
@@ -460,9 +450,6 @@
     render();
   })();
 
-  // =================================================================
-  // 06  All 189 fronts
-  // =================================================================
   (function frontsPlate() {
     const svg = document.getElementById("fr-svg");
     const fig = document.getElementById("fr-fig");
@@ -471,7 +458,7 @@
     const xS = (v) => L + ((v - XMIN) / (XMAX - XMIN)) * (Rr - L);
     const rowBase = { "Puna Plateau": 150, "Eastern Cordillera": 262, "Pampean Ranges": 374 };
     clear(svg);
-    // class boundaries
+
     [[E1, "1.65"], [E2, "2.5"]].forEach(([v, s]) => { S("line", { x1: xS(v), y1: 26, x2: xS(v), y2: 386, class: "ln thin dash" }, svg); txt(svg, xS(v), 400, s, "tick", "middle"); });
     txt(svg, (xS(XMIN) + xS(E1)) / 2, 18, "Class 1 · Holocene", "lbl", "middle");
     txt(svg, (xS(E1) + xS(E2)) / 2, 18, "Class 2", "lbl", "middle");
@@ -501,7 +488,7 @@
       });
     });
     legendInto(document.getElementById("fr-legend"));
-    // class table
+
     const tb = document.querySelector("#class-table tbody");
     const t41 = D.results.class_counts_table41, t42 = D.results.class_counts_table42_reported;
     PROV.forEach((p) => {
@@ -515,9 +502,7 @@
     });
   })();
 
-  // =================================================================
-  // 07  Valleys versus fronts
-  // =================================================================
+
   (function vsPlate() {
     const svg = document.getElementById("vs-svg");
     const fig = document.getElementById("vs-fig");
@@ -546,16 +531,16 @@
     mathLabel(svg, Rr, BOT + 40, "S", "mf", "end");
     mathLabel(svg, 14, TOP + 8, "V", "f");
     txt(svg, 14, TOP + 22, "median", "lbl-sub");
-    // expected direction
+
     S("line", { x1: xS(1.15), y1: yS(0.4), x2: xS(2.6), y2: yS(4.5), class: "ln thin dash" }, svg);
     arrowHead(svg, xS(2.6), yS(4.5), Math.atan2(yS(4.5) - yS(0.4), xS(2.6) - xS(1.15)));
     txt(svg, xS(2.64), yS(4.5) - 6, "expected", "lbl");
-    // points
+
     D.fronts.forEach((f) => {
       const g = marker(svg, f.province, xS(f.smf), yS(Math.max(0.26, f.vf_median)), 3.6);
       tip.bind(g, frontTip(f));
     });
-    // OLS in log space
+
     const xs = D.fronts.map((f) => f.smf), ys = D.fronts.map((f) => Math.log10(f.vf_median));
     const n = xs.length, mx = xs.reduce((a, b) => a + b, 0) / n, my = ys.reduce((a, b) => a + b, 0) / n;
     let sxy = 0, sxx = 0; for (let i = 0; i < n; i++) { sxy += (xs[i] - mx) * (ys[i] - my); sxx += (xs[i] - mx) ** 2; }
@@ -566,9 +551,7 @@
     legendInto(document.getElementById("vs-legend"));
   })();
 
-  // =================================================================
-  // 08  Rose diagrams
-  // =================================================================
+
   (function rosePlate() {
     const box = document.getElementById("roses");
     const T = D.tfactor, Rt = D.results.t_factor;
@@ -605,9 +588,6 @@
     document.getElementById("tilt-mv").textContent = PROV.map((p) => fmt(T[p].mean_vector_T, 3)).join(", ").replace(/, ([^,]*)$/, " and $1");
   })();
 
-  // =================================================================
-  // 09  First-order basin fan profiles
-  // =================================================================
   (function fanPlate() {
     const box = document.getElementById("fans");
     const BASE = 170;
@@ -657,9 +637,7 @@
     });
   })();
 
-  // =================================================================
-  // 10  Questions to ask
-  // =================================================================
+
   (function notes() {
     const ul = document.getElementById("flags");
     D.results.questions_for_author.forEach((q) => {
@@ -672,6 +650,5 @@
     });
   })();
 
-  // hero draw-on, once, on load
   if (document.visibilityState === "visible") drawOn(document.getElementById("xsec"));
 })();
