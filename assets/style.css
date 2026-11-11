@@ -1,7 +1,4 @@
-/* Layout concept: a stack of numbered drafting plates, as in an engineering
-   sheet set. Each plate = title block top-left, one drawing, a serif formula,
-   a running footer with sheet number. Monochrome ink on paper; provinces are
-   told apart by marker shape, never by colour. */
+
 :root {
   --paper: #fbfbf9;
   --ink: #121316;
@@ -38,7 +35,7 @@ body {
 }
 .sheet { max-width: 1180px; margin: 0 auto; }
 
-/* ---------- top bar ---------- */
+
 .topbar {
   display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
   padding-block: 22px 18px;
@@ -60,7 +57,7 @@ body {
 .theme-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 body, .tip, .chip { transition: background-color .25s ease, color .25s ease; }
 
-/* ---------- plates ---------- */
+
 .plate {
   border-top: 1px solid var(--ink);
   padding-block: 28px 18px;
@@ -105,7 +102,7 @@ body, .tip, .chip { transition: background-color .25s ease, color .25s ease; }
 }
 .plate-foot span:last-child { font-variant-numeric: tabular-nums; white-space: nowrap; }
 
-/* ---------- SVG drafting vocabulary ---------- */
+
 .ln { fill: none; stroke: var(--ink); stroke-width: 1.4; stroke-linejoin: round; stroke-linecap: round; }
 .ln.thin { stroke-width: 0.8; }
 .ln.faint { stroke: var(--ink-3); stroke-width: 0.8; }
@@ -121,7 +118,7 @@ body, .tip, .chip { transition: background-color .25s ease, color .25s ease; }
 .axis { stroke: var(--ink); stroke-width: 0.9; fill: none; }
 .grid { stroke: var(--rule); stroke-width: 0.8; fill: none; }
 
-/* markers: province by shape */
+
 .m-puna { fill: var(--ink); stroke: none; }
 .m-ec { fill: var(--paper); stroke: var(--ink); stroke-width: 1.1; }
 .m-pr { fill: none; stroke: var(--ink); stroke-width: 1.2; }
@@ -129,7 +126,6 @@ body, .tip, .chip { transition: background-color .25s ease, color .25s ease; }
 .mk:hover .m-puna, .mk:hover .m-ec, .mk:hover .m-pr, .mk.on .m-puna, .mk.on .m-ec, .mk.on .m-pr { stroke: var(--ink); stroke-width: 2.4; }
 .dim { opacity: 0.12; }
 
-/* draw-on animation (only ever runs from a visible resting state) */
 @media (prefers-reduced-motion: no-preference) {
   .drawing [data-draw] { transition: stroke-dashoffset 1.6s cubic-bezier(.45,.05,.25,1); }
 }
@@ -166,7 +162,7 @@ input[type="range"] { width: 100%; accent-color: var(--ink); }
 }
 .tip b { font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; font-size: 10.5px; }
 
-/* stat rows */
+
 .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--ink); }
 .stats > div { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--rule); min-width: 0; }
 .stats .k { font-size: 10.5px; letter-spacing: var(--track); text-transform: uppercase; color: var(--ink-2); }
@@ -184,7 +180,7 @@ input[type="range"] { width: 100%; accent-color: var(--ink); }
 
 .twin { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px; }
 
-/* reference tables */
+
 .tablewrap { overflow-x: auto; }
 table { border-collapse: collapse; width: 100%; font-size: 13px; font-variant-numeric: tabular-nums; }
 th, td { text-align: left; padding: 8px 12px 8px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
@@ -225,13 +221,13 @@ code { font-size: 12.5px; background: var(--wash); padding: 1px 4px; border-radi
   .plate-foot span:first-child { font-size: 9.5px; }
 }
 
-/* ---------- intro ---------- */
+
 .hero-intro { display: grid; gap: 14px; max-width: 68ch; }
 .hero-intro p { margin: 0; color: var(--ink-2); font-size: 15.5px; line-height: 1.7; }
 .hero-intro .epigraph { font-family: var(--font-math); color: var(--ink); font-size: clamp(19px, 2.2vw, 23px); line-height: 1.45; padding-bottom: 6px; border-bottom: 1px solid var(--rule); }
 .hero-intro .epigraph i { font-style: italic; }
 
-/* ---------- "?" plain-language panels ---------- */
+
 .eli-btn {
   display: inline-grid; place-items: center; vertical-align: 0.22em; margin-left: 10px;
   width: 22px; height: 22px; border-radius: 50%;
@@ -253,7 +249,7 @@ code { font-size: 12.5px; background: var(--wash); padding: 1px 4px; border-radi
 .plate-head > div { flex: 1 1 auto; min-width: 0; }
 .plate-head h1, .plate-head h2 { text-wrap: wrap; }
 
-/* ---------- geologic time key ---------- */
+
 .timescale { display: grid; gap: 6px; }
 .ts-title { font-size: 10.5px; letter-spacing: var(--track); text-transform: uppercase; font-weight: 500; }
 .ts-row { display: grid; grid-template-columns: repeat(75, minmax(0, 1fr)); border: 1px solid var(--ink); }
